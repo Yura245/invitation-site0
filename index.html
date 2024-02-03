@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Приглашение</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    #invite-container {
+      text-align: center;
+      position: relative;
+    }
+
+    #yes-btn, #no-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes-btn {
+      left: calc(50% - 70px); /* Выравнивание по центру */
+    }
+
+    #no-btn {
+      left: calc(50% + 10px); /* Отступ от кнопки "Да" */
+    }
+  </style>
+</head>
+<body>
+  <div id="invite-container">
+    <h1>Пойдешь гулять со мной?</h1>
+    <div>
+      <button id="yes-btn" onclick="showResponse(true)">Да</button>
+      <button id="no-btn" onclick="showResponse(false)">Нет</button>
+    </div>
+  </div>
+
+  <script>
+    const squareSize = 400; // Размер квадрата
+
+    function showResponse(isYes) {
+      const inviteContainer = document.getElementById('invite-container');
+      const noBtn = document.getElementById('no-btn');
+
+      if (isYes) {
+        inviteContainer.innerHTML = '<h1>Круто, давай встретимся в воскресенье? А по времени договоримся))</h1>';
+      } else {
+        const maxTop = window.innerHeight - 50;
+        const maxLeft = window.innerWidth - 100;
+
+        let newPositionTop = Math.min(Math.floor(Math.random() * maxTop), maxTop);
+        let newPositionLeft = Math.min(Math.floor(Math.random() * maxLeft), maxLeft);
+
+        // Проверка границ перед изменением положения кнопки
+        newPositionTop = Math.max(newPositionTop, 0);
+        newPositionLeft = Math.max(newPositionLeft, 0);
+
+        // Проверка границ квадрата
+        newPositionTop = Math.min(newPositionTop, squareSize);
+        newPositionLeft = Math.min(newPositionLeft, squareSize);
+
+        noBtn.style.top = newPositionTop + 'px';
+        noBtn.style.left = newPositionLeft + 'px';
+      }
+    }
+  </script>
+</body>
+</html>
